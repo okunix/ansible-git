@@ -1,6 +1,6 @@
 {%- if git_users is defined %}
 {%- for i in git_users %}
-{%- for j in i.ssh_keys %}
+{%- for j in i.ssh_keys | flatten %}
 {{ git_ssh_opts }} {{ j }} {{ i.name }}
 {% endfor %}
 {% endfor %}

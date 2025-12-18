@@ -9,7 +9,9 @@
       vars:
         git_users:
           - name: yusuf
-            ssh_keys: "{{ lookup('ansible.builtin.url', 'https://github.com/okunix.keys') | split(',') }}"
+            ssh_keys:
+              - "{{ lookup('ansible.builtin.url', 'https://github.com/okunix.keys') | split(',') }}"
+              - "{{ lookup('ansible.builtin.file', '/home/yusuf/.ssh/id_rsa_2.pub') }}"
 
     - name: Initialize git project
       ansible.builtin.include_role:
