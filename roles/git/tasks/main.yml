@@ -1,0 +1,42 @@
+---
+- name: Installing git and dependencies
+  ansible.builtin.include_tasks:
+    file: "{{ ansible_os_family | lower }}_install.yml"
+
+- name: Creating git group
+  ansible.builtin.group:
+    name: "{{ git_group }}"
+    system: true
+    state: present
+
+- name: Creating git user
+  ansible.builtin.user:
+    name: "{{ git_user }}"
+    group: "{{ git_group }}"
+    system: true
+    shell: /usr/bin/git-shell
+    state: present
+    home: "{{ git_home }}"
+    create_home: true
+
+- name: Create .ssh directory
+  ansible.builtin.file:
+    name: "{{ git_home }}/.ssh"
+    owner: "{{ git_user }}"
+    group: "{{ git_group }}"
+    mode: "0700"
+    state: directory
+
+- name: Adding users to authorized_keys
+  ansible.builtin.template:
+    src: authorized_keys.j2
+    dest: "{{ git_home }}/.ssh/authorized_keys"
+    owner: "{{ git_user }}"
+    group: "{{ git_group }}"
+    mode: "0600"
+
+- name: Making sure sshd is started
+  ansible.builtin.service:
+    name: sshd
+    state: started
+    enabled: true

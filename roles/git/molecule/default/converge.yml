@@ -1,0 +1,19 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Apply role under test
+      ansible.builtin.include_role:
+        name: okunix.git.git
+      vars:
+        git_users:
+          - name: yusuf
+            key: "{{ lookup('ansible.builtin.file', '/home/yusuf/.ssh/id_rsa.pub') }}"
+
+    - name: Initialize git project
+      ansible.builtin.include_role:
+        name: okunix.git.git
+        tasks_from: add_project.yml
+      vars:
+        git_project_name: test_project

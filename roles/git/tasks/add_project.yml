@@ -1,0 +1,16 @@
+---
+- name: Creating project directory
+  ansible.builtin.file:
+    name: "{{ git_home }}/{{ git_project_name }}.git"
+    owner: "{{ git_user }}"
+    group: "{{ git_group }}"
+    mode: "0755"
+    state: directory
+
+- name: Initializing git project
+  ansible.builtin.command:
+    cmd: >-
+      git init --bare "{{ git_home }}/{{ git_project_name }}.git"
+    creates: "{{ git_home }}/{{ git_project_name }}.git/HEAD"
+  become_user: "{{ git_user }}"
+  become: true

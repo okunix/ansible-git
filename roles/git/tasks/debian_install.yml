@@ -1,0 +1,9 @@
+---
+- name: Installing git and dependencies
+  ansible.builtin.apt:
+    name:
+      - git
+      - openssh-server
+      - openssh-client
+    update_cache: true
+    state: present

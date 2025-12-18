@@ -1,0 +1,23 @@
+namespace: okunix
+name: git
+version: 0.1.0
+readme: README.md
+authors:
+  - Yusuf
+
+description: ansible playbooks for bare git server setup
+tags:
+  - ansible
+  - bare_metal
+  - storage
+dependencies: {}
+repository: https://github.com/okunix/ansible-git
+documentation: https://github.com/okunix/ansible-git
+homepage: https://github.com/okunix/ansible-git
+issues: https://github.com/okunix/ansible-git/issues
+build_ignore:
+  - Dockerfile
+  - ansible.cfg
+  - .gitignore
+  - .gitattributes
+  - CONTRIBUTING.md

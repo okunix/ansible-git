@@ -1,0 +1,6 @@
+---
+- name: Removing project
+  ansible.builtin.file:
+    path: "{{ git_home }}/{{ git_project_name }}.git"
+    state: absent
+    recurse: true

@@ -1,0 +1,13 @@
+---
+git_user: git
+git_group: "{{ git_user }}"
+git_home: /home/git
+
+git_ssh_opts: "no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty"
+
+#
+# git_users:
+#   - name: ...
+#     key: |-
+#       ...
+#
