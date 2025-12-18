@@ -1,6 +1,16 @@
 ---
+- name: Setting project path
+  ansible.builtin.set_fact:
+    git_project_path: "{{ git_home }}/{{ git_project_name }}.git"
+
+- name: Checking if project exists
+  ansible.builtin.stat:
+    path: "{{ git_project_path }}"
+  register: project_file
+
 - name: Removing project
   ansible.builtin.file:
-    path: "{{ git_home }}/{{ git_project_name }}.git"
+    path: "{{ git_project_path }}"
     state: absent
     recurse: true
+  when: project_file.stat.exists

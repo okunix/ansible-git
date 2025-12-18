@@ -1,0 +1,15 @@
+---
+- name: Remove Project
+  hosts: "{{ target_hosts }}"
+  vars_prompt:
+    - name: project_name
+      prompt: Please provide project name
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Including role
+      ansible.builtin.include_role:
+        name: okunix.git.git
+        tasks_from: remove_project.yml
+      vars:
+        git_project_name: "{{ project_name }}"

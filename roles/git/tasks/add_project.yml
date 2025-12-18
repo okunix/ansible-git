@@ -1,7 +1,11 @@
 ---
+- name: Setting project path
+  ansible.builtin.set_fact:
+    git_project_path: "{{ git_home }}/{{ git_project_name }}.git"
+
 - name: Creating project directory
   ansible.builtin.file:
-    name: "{{ git_home }}/{{ git_project_name }}.git"
+    name: "{{ git_project_path }}"
     owner: "{{ git_user }}"
     group: "{{ git_group }}"
     mode: "0755"
@@ -11,6 +15,6 @@
   ansible.builtin.command:
     cmd: >-
       git init --bare "{{ git_home }}/{{ git_project_name }}.git"
-    creates: "{{ git_home }}/{{ git_project_name }}.git/HEAD"
+    creates: "{{ git_project_path }}/HEAD"
   become_user: "{{ git_user }}"
   become: true

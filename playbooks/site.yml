@@ -1,0 +1,7 @@
+---
+- name: Setup git server
+  hosts: git_servers
+  become: true
+  gather_facts: true
+  roles:
+    - role: okunix.git.git

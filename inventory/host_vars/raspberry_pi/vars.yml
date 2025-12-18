@@ -1,0 +1,5 @@
+---
+git_users:
+  - name: yusuf
+    ssh_keys:
+      - "{{ lookup('ansible.builtin.url', 'https://github.com/okunix.keys') | split(',') }}"
